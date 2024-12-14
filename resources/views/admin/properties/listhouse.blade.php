@@ -1,4 +1,4 @@
-@extends('layouts.propertysidebar')
+@extends('layouts.admin')
 
 @section('content')
 <head>
@@ -9,9 +9,9 @@
 </head>
 <div class="container">
 
-    <h1>Houses for {{ $site->name }}</h1>
-    <a href="{{ route('owner.houses.create', $site->id) }}">Add House</a>
-
+    <h1 style="margin: 10px; padding: 10px">Houses for {{ $site->name }} site</h1>
+    {{-- <a href="{{ route('owner.houses.create', $site->id) }}">Add House</a> --}}
+    {{-- <a href="{{ route('admin.properties.housecreate', $site->id) }}">Add House</a> --}}
     @if ($houses->isEmpty())
         <div class="alert alert-info" role="alert">
             No properties found. Please add a new property.
@@ -45,7 +45,6 @@
 
                         <div class="card-body" style="height: 250px;">
                             <h5 class="card-title" id="display">{{ $house->title }}</h5>
-                            <p class="card-text" id="display"><strong>Address:</strong> {{ $house->address }}</p>
                             <p class="card-text" id="display"><strong>Location:</strong> {{ $house->location }}</p>
                             <p class="card-text" id="display"><strong>Price:</strong> {{ $house->price }}</p>
                             <p class="card-text" id="display"><strong>Bedrooms:</strong> {{ $house->bedrooms}}</p>

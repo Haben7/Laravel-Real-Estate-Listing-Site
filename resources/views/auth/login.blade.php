@@ -96,7 +96,7 @@ h1{
                 <input type="password" name="password" placeholder="inser your password" required>
             </div>
             <button type="submit">Login</button>
-            <a href="">Forgot Your Password?</a>
+            {{-- <a href="">Forgot Your Password?</a> --}}
         </form>
     </div>
 </body>

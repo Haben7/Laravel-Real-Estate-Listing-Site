@@ -1,38 +1,61 @@
-@extends('layouts.site')
+@extends('layouts.sidebar')
 
 @section('content')
-    {{-- <h1 style="background-color: ; color: white;  margin-bottom: 20px;font-family: 'Arial', sans-serif; margin-left:10px;font-size: 2em;">Sites for</h1> --}}
-    <a href="{{ route('sites.create') }}" style="display: block; text-align: center; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin: 20px auto; width: 150px; transition: background-color 0.3s; font-size: 1em;margin-left:10px;"class="bg-indigo-900">Add Site</a>
-    
-    <table style="width: 80%; border-collapse: collapse; margin-top: 20px;margin-left:10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-        <thead>
-            <tr style=" color: white;" class="bg-indigo-900">
-                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; font-size: 1.1em;">Site Name</th>
-                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; font-size: 1.1em;">Actions</th>
-                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; font-size: 1.1em;">Add House</th>
-                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; font-size: 1.1em;">View Detail</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($sites as $site)
-                <tr style="background-color: white; border-bottom: 1px solid #dee2e6; transition: background-color 0.3s;">
-                    <td style="padding: 12px; font-size: 1em;">{{ $site->name }}</td>
-                    <td style="padding: 12px; font-size: 1em;">
-                        <a href="{{ route('sites.edit', $site->id) }}" style="color: #007bff; text-decoration: none; transition: color 0.3s;">Edit</a> |
-                        <form method="POST" action="{{ route('sites.destroy', $site->id) }}" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" style="background: none; border: none; color: #dc3545; text-decoration: underline; cursor: pointer;" onclick="return confirm('Are you sure you want to delete this site?');">Delete</button>
-                        </form>
-                    </td>
-                    <td style="padding: 12px; font-size: 1em;">
-                        <a href="{{ route('owner.houses.index', [$site->id]) }}" style="color: #007bff; text-decoration: none; transition: color 0.3s;">Add</a>
-                    </td>
-                    <td style="padding: 12px; font-size: 1em;">
-                        <a href="{{ route('sites.edit', [$site->id]) }}" style="color: #007bff; text-decoration: none; transition: color 0.3s;">View</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+<div class="container-fluid px-4">
+    <h1 class="mt-4 text-2xl font-bold mb-4">All Sites</h1>
+   
+    <div class="mb-3">
+        <a href="{{ route('sites.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Add Site
+        </a>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-home"></i> Site List
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="datatablesSimple" style="width: 100%;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Site Name</th>
+                            <th class="text-center">Actions</th>
+                            <th class="text-center">Houses</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($sites as $site)
+                            <tr>
+                                <td>{{ $site->name }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('sites.edit', $site->id) }}" class="btn btn-sm btn-info">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <form action="{{ route('sites.destroy', $site->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this site?');">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('owner.houses.index', [$site->id]) }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination Links -->
+    <div class="d-flex justify-content-center">
+        {{ $sites->links('pagination::bootstrap-4') }}
+    </div>
+</div>
 @endsection

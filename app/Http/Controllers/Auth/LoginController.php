@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
+    use AuthenticatesUsers;
+
     public function showLoginForm()
     {
         return view('auth.login');
@@ -15,32 +19,22 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $input = $request->all();
+        
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            return $this->authenticated($request, $user);
+        if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.index');
+            } else {
+                return redirect()->route('owner.index');
+            }
+        } else {
+            return redirect()->route('login')->with('error', 'Email or password is incorrect.');
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials.']);
-    }
-
-    protected function authenticated(Request $request, $user)
-    {
-        if ($user->role === 'admin') {
-            return redirect('/admin');
-        }
-
-        if ($user->role === 'owner') {
-            return redirect('/owner');
-        }
-
-        return redirect('/home');
     }
 
     public function logout()
@@ -50,3 +44,23 @@ class LoginController extends Controller
     }
 }
 
+
+
+
+
+  // public function login(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+    //         $user = Auth::user();
+    //         return $this->authenticated($request, $user);
+    //     }
+
+    //     return back()->withErrors(['email' => 'Invalid credentials.']);
+    // }

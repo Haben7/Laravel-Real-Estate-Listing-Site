@@ -58,7 +58,7 @@
 <body class="bg-gray-100">
 
     <!-- Header -->
-    <header class="bg-gray-800 text-white border-b border-gray-600 shadow sticky top-0 z-50">
+    <header class="bg-purple-900 text-white border-b border-purple-900 shadow sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold">Real Estate</h1>
             <nav>
@@ -77,7 +77,7 @@
     <div class="flex">
 
         <!-- Sidebar -->
-        <aside class="bg-indigo-900 text-gray-100 w-64 shadow h-screen fixed top-0 left-0">
+        <aside class="bg-purple-800 text-gray-100 w-64 shadow h-screen fixed top-0 left-0">
             
             <div class="p-4" id="div">
                 <ul class="mt-4 space-y-2">
@@ -85,11 +85,11 @@
                     <li id="li"><a href="{{ route('users.index') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-users"></i> User Management</a></li>
                     <li id="li"><a href="{{ route('admin.properties.owners') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-home"></i> Property Management</a></li>
                    
-                    <li id="li"><a href="/admin/settings" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-cogs"></i> Settings</a></li>
+                    <li id="li"><a href="{{ route('admin.setting.update') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-cogs"></i> Settings</a></li>
                 </ul>
                 
             </div>
-            <div id="owner" class="bg-indigo-600 ">Logged in as:<br>
+            <div id="owner" class="bg-purple-700 ">Logged in as:<br>
                 An Admin</div>
         </aside>
 
@@ -107,10 +107,10 @@
             </form>
 
             <div class="flex justify-around" id="card">
-<div id="id" class="max-w-sm p-16 bg-gray-900 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+<div id="id" class="max-w-sm p-16 bg-gray-600 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="{{ route('users.index') }}" class="block px-4 py-2 rounded " id="user"><i class="fas fa-users"></i> Users</a>    <hr class="w-100 border-t-2 border-gray-300" />
 
-    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <a href="{{ route('users.index') }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         View Details        
         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -121,7 +121,7 @@
 <div id="id" class="max-w-sm p-16 bg-purple-900 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="{{ route('admin.properties.owners') }}" class="block px-4 py-2 rounded "id="user"><i class="fas fa-home"></i> Property</a>    <hr class="w-100 border-t-2 border-gray-300" />
 
-    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-900 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <a href="{{ route('admin.properties.owners') }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-900 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         View Details
         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -129,10 +129,10 @@
     </a>
 </div>
 
-<div id="id" class="max-w-sm p-16 bg-green-900 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <a href="/admin/users/create" class="block px-4 py-2 rounded "><i class="fas fa-cogs"id="user"></i> Settings</a>    <hr class="w-100 border-t-2 border-gray-300" />
+<div id="id" class="max-w-sm p-16 bg-green-700 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="{{ route('admin.setting.update') }}" class="block px-4 py-2 rounded "><i class="fas fa-cogs"id="user"></i> Settings</a>    <hr class="w-100 border-t-2 border-gray-300" />
 
-    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <a href="{{ route('admin.setting.update') }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         View Details
         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -144,105 +144,87 @@
 
 </div>
 
-    <div class="container mx-auto" id="graph">
+<div class="container mx-auto" id="graph">
+    <!-- Flex container for side-by-side display -->
+    <div class="flex flex-wrap md:flex-nowrap space-x-4">
 
         <!-- User Registration Over Time -->
-        <div class="mb-8">
+        <div class="w-full md:w-1/2 mb-8">
             <h2 class="text-2xl font-semibold mb-4">User Registration Over Time</h2>
             <canvas id="userRegistrationChart"></canvas>
         </div>
 
         <!-- Total Properties Listed -->
-        <div>
+        <div class="w-full md:w-1/2 mb-8">
             <h2 class="text-2xl font-semibold mb-4">Total Properties Listed</h2>
             <canvas id="totalPropertiesChart"></canvas>
         </div>
+        
     </div>
+</div>
 
-    <script>
-        // Data for User Registration Over Time (Line Chart)
-        const userRegistrationData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','Augest','September','October','November','December'], // Replace with actual time periods
-            datasets: [{
-                label: 'New Users',
-                data: [30, 50, 70, 60, 90, 120, 140, 20, 33,22,11,45], // Replace with actual registration data
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 2,
-                fill: true
-            }]
-        };
+<script>
+    // User registration data (passed from the controller)
+    const userRegistrationData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [{
+            label: 'New Users',
+            data: @json(array_values($userRegistrations)),
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderWidth: 2,
+            fill: true
+        }]
+    };
 
-        // Config for User Registration Chart
-        const userRegistrationConfig = {
-            type: 'line',
-            data: userRegistrationData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'User Registration Over Time'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+    const userRegistrationConfig = {
+        type: 'line',
+        data: userRegistrationData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'User Registration Over Time' }
             },
-        };
+            scales: { y: { beginAtZero: true } }
+        },
+    };
 
-        // Create User Registration Chart
-        const userRegistrationChart = new Chart(
-            document.getElementById('userRegistrationChart'),
-            userRegistrationConfig
-        );
+    const userRegistrationChart = new Chart(
+        document.getElementById('userRegistrationChart'),
+        userRegistrationConfig
+    );
 
-        // Data for Total Properties Listed (Bar Chart)
-        const totalPropertiesData = {
-            labels: ['2021', '2022', '2023', '2024'], // Replace with actual time periods
-            datasets: [{
-                label: 'Total Properties Listed',
-                data: [20, 30, 50, 40], // Replace with actual property data
-                backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1
-            }]
-        };
+    // Properties listed data (passed from the controller)
+    const totalPropertiesData = {
+        labels: @json(array_keys($propertiesListed)),
+        datasets: [{
+            label: 'Total Properties Listed',
+            data: @json(array_values($propertiesListed)),
+            backgroundColor: 'rgba(153, 102, 255, 0.5)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+        }]
+    };
 
-        // Config for Total Properties Chart
-        const totalPropertiesConfig = {
-            type: 'bar',
-            data: totalPropertiesData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Total Properties Listed Over Time'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+    const totalPropertiesConfig = {
+        type: 'bar',
+        data: totalPropertiesData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Total Properties Listed Over Time' }
             },
-        };
+            scales: { y: { beginAtZero: true } }
+        },
+    };
 
-        // Create Total Properties Chart
-        const totalPropertiesChart = new Chart(
-            document.getElementById('totalPropertiesChart'),
-            totalPropertiesConfig
-        );
-    </script>
+    const totalPropertiesChart = new Chart(
+        document.getElementById('totalPropertiesChart'),
+        totalPropertiesConfig
+    );
+</script>
 
 
 

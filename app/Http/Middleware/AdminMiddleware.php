@@ -7,30 +7,27 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+// class AdminMiddleware
+// {
+  
+//     public function handle(Request $request, Closure $next)
+//     {
+//         if (!Auth::check() || Auth::user()->role !== 'admin') {
+//             return redirect('/'); // Redirect if not admin
+//         }
+//         return $next($request);
+//     }
+
+
 class AdminMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    // public function handle($request, Closure $next)
-    // {
-    //     // Check if the authenticated user is an admin
-    //     if (Auth::check() || Auth::user()->role !== 'admin') {
-    //         return $next($request);
-    //     }
-
-    //     // If the user is not an admin, redirect to the home page or return 403
-    //     return redirect('/')->with('error', 'Unauthorized access');
-    // }
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check() || Auth::user()->role !== 'admin') {
-            return redirect('/'); // Redirect if not admin
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            return $next($request);
         }
-        return $next($request);
+        return redirect('/'); // Redirect to the home page or login page if not an admin
     }
 }
+
+

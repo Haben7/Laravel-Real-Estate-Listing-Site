@@ -13,5 +13,5 @@ class City extends Model
     protected $table = 'cities'; 
 
     // If you want to allow mass assignment for specific fields, define them here
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'image'];
 }

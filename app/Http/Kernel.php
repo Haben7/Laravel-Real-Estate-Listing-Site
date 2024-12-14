@@ -11,12 +11,40 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    
+    // protected $routeMiddleware = [
+    //     'auth' => \App\Http\Middleware\Authenticate::class,
+    //     'admin' => \App\Http\Middleware\AdminMiddleware::class,
+    //     'owner' => \App\Http\Middleware\OwnerMiddleware::class,
+    //     // other middlewares like auth, etc.
+    //     'simple_cors' => \App\Http\Middleware\SimpleCors::class,
+        
+    //         'role' => \App\Http\Middleware\RoleMiddleware::class,
+        
+        
+    // ];
+
+
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'owner' => \App\Http\Middleware\OwnerMiddleware::class,
-        // other middlewares like auth, etc.
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+        // other middleware...
     ];
+    
+    
+
+    // protected $routeMiddleware = [
+    //     // Other middleware...
+    //     'role' => \Spatie\Permission\Middlewares\Role::class,
+    //     'auth' => \App\Http\Middleware\Authenticate::class,
+
+    // ];
+    
+    // protected $routeMiddleware = [
+    //     // Other middleware
+    //     'roleCheck' => \App\Http\Middleware\RoleCheck::class,
+    // ];
+    
     protected $middleware = [
         // Add global middleware here
     ];
@@ -34,11 +62,12 @@ class Kernel extends HttpKernel
             // other middleware
         ],
 
-       'api' => [
-    \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-    'throttle:api',
-    \Illuminate\Routing\Middleware\SubstituteBindings::class,
-],
+        'api' => [
+            \Fruitcake\Cors\HandleCors::class, // Add the CORS middleware here
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
     ];
 
     /**
@@ -46,5 +75,4 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-  
 }

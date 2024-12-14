@@ -17,8 +17,14 @@ class House extends Model
         'location',
         'bedrooms',
         'bathrooms',
-        // Other fields...
-    ];
+        'property_type',          
+        'negotiable',
+        'owner_contact',
+        'owner_email',
+        'size',
+        'area',
+        'description'
+        ];
 
     public function site()
     {
@@ -30,4 +36,8 @@ class House extends Model
     {
         return $this->hasMany(Image::class);
     }
+    public function bookmarkedBy()
+{
+    return $this->belongsToMany(User::class, 'bookmarks', 'house_id', 'user_id');
+}
 }

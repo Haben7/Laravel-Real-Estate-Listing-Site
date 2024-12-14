@@ -1,114 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Panel</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- Include any CSS files or libraries, such as Bootstrap or Tailwind -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <style>
-       #div{
-            margin-top: 70px;
-            border-radius: 20px
-        }
-        #li{
-            margin-top: 66px
-        }
-        ul{
-            margin-top: 2px;
-        }
-        h1{
-                }        
-        #main{
-        margin-left: 22%;
-        margin-top: 2%
-        }
-        #sear{
-            margin-top: 10px;
-            width: 95%;
-        }
-        #card{
-            width: 95%;
-            margin-top: 15px;
-            margin-bottom: 20px;            
-        }
-        #id{
-            height: 10px;
-            padding-top: 20px;
-            padding-bottom: 120px;
-        }
-        #user{
-            margin-bottom: 23px
-        }
-        hr{
-            width: 100%;
-            padding-bottom: 7px
-        }
-        #graph{
-            width: 95%;
-        }
-        #owner{
-            margin-top: 70px;
-            padding: 8px 8px 8px 18px;
-
-        }
-      th{
-        margin-leftft: 2px
-      }
-    </style>
-</head>
-<body class="bg-gray-100">
-  <!-- Header -->
-  <header class="bg-gray-800 text-white border-b border-gray-600 shadow sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-xl font-bold">Real Estate</h1>
-        <nav>
-            <ul class="flex space-x-4">
-                <li>
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class=" hover:bg-gray-600">Logout</button>
-                    </form>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Admin Dashboard</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+<link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="index.html">Real Estate</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('admin.setting.update') }}">Settings</a></li>
+                       
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form></li>
+                    </ul>
                 </li>
             </ul>
         </nav>
-    </div>
-</header>
-<div class="flex">
-
-     <!-- Sidebar -->
-     <aside class="bg-indigo-900 text-gray-100 w-64 shadow h-screen fixed top-0 left-0">
-            
-      <div class="p-4" id="div">
-          <ul class="mt-4 space-y-2">
-              <li id="li"><a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-              <li id="li"><a href="{{ route('users.index') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-users"></i> User Management</a></li>
-              <li id="li"><a href="{{ route('admin.properties.owners') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-home"></i> Property Management</a></li>
-              <li id="li"><a href="/admin/settings" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-cogs"></i> Settings</a></li>
-          </ul>
-          
-      </div>
-      <div id="owner" class="bg-indigo-600 ">Logged in as:<br>
-          An Admin</div>
-  </aside>
-    <!-- Admin Sidebar (you can customize this as needed) -->
-    <div class="flex min-h-screen">
-        <aside class="w-64 bg-gray-800 text-white">
-            <div class="px-4 py-4">
-                <h2 class="text-2xl font-semibold">Admin Dashboard</h2>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="{{ route('admin.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Manage</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                User Management                   <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ route('users.create') }}">Create User</a>
+                                    <a class="nav-link" href="{{ route('users.index') }}">All Users</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link" href="{{ route('admin.properties.owners') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Property
+                            </a>
+                            <a class="nav-link" href="{{ route('admin.setting.update') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Settings
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Addons</div>
+                            <a class="nav-link" href="{{ route('admin.properties.owners') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Charts
+                            </a>
+                            <a class="nav-link" href="tables.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Tables
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        An Admin
+                    </div>
+                </nav>
             </div>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="flex-1 p-6">
-            @yield('content')
-        </main>
-    </div>
-
-    <!-- Include any necessary JavaScript files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.2/alpine.js"></script>
-</div>
-</body>
+            <div id="layoutSidenav_content">
+                <main class="flex-1 p-6">
+                    @yield('content')
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+    </body>
 </html>

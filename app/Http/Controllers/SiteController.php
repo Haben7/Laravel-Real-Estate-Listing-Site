@@ -12,11 +12,14 @@ class SiteController extends Controller
 {
     public function index()
     {
+        $sites = Site::withCount('houses')->where('owner_id', Auth::id())->get();
+
         $sites = Site::where('owner_id', Auth::id())->get();
+        $sites = Site::paginate(7); // Adjust the number to change the items per page
     return view('owner.sites.index', compact('sites'));
     }
-
-
+    // $owners = User::where('role', 'owner')->get();
+    // $owners = User::where('role', 'owner')->paginate(8);
 
 
     public function create()

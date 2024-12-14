@@ -122,5 +122,15 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+//     'providers' => [
+//     // Laravel Framework Service Providers...
+//     // Illuminate\Auth\AuthServiceProvider::class,
+//     // Illuminate\Cache\CacheServiceProvider::class,
+//     // Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+//     Illuminate\View\ViewServiceProvider::class,
+//     Illuminate\Filesystem\FilesystemServiceProvider::class, // Add this line
+//     Spatie\Permission\PermissionServiceProvider::class,
+// ],
+
 
 ];

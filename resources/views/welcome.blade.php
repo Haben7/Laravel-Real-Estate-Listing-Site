@@ -15,7 +15,7 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <div >
-            <img  src="{{URL("images/ghaziabad-uttar-pradesh-homes-photos-1366x768.webp")}}" alt="no image" />
+            {{-- <img  src="{{URL("images/ghaziabad-uttar-pradesh-homes-photos-1366x768.webp")}}" alt="no image" /> --}}
            
                       
                         @if (Route::has('login'))

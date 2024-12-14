@@ -31,13 +31,12 @@ class HouseController extends Controller
         return HouseResource::collection($houses);
     }
 
-    // app/Http/Controllers/HouseController.php
 
     public function search(Request $request)
     {
         // Start querying the House model
         $query = House::query();
-    
+        
         // Apply filters based on request inputs
         if ($request->has('bedrooms')) {
             $query->where('bedrooms', $request->input('bedrooms'));
@@ -51,6 +50,18 @@ class HouseController extends Controller
             $query->where('location', 'LIKE', '%' . $request->input('location') . '%');
         }
     
+        if ($request->has('property_type')) {
+            $query->where('property_type', $request->input('property_type'));
+        }
+    
+        if ($request->has('size_min')) {
+            $query->where('size', '>=', $request->input('size_min'));
+        }
+    
+        if ($request->has('size_max')) {
+            $query->where('size', '<=', $request->input('size_max'));
+        }
+    
         if ($request->has('price_min')) {
             $query->where('price', '>=', $request->input('price_min'));
         }
@@ -59,11 +70,22 @@ class HouseController extends Controller
             $query->where('price', '<=', $request->input('price_max'));
         }
     
-        // Fetch the filtered houses
-        $houses = $query->with('images')->get();
+        // New condition for area filter
+        if ($request->has('area')) {
+            $query->where('area', 'LIKE', '%' . $request->input('area') . '%');
+        }
     
-        // Return the houses using HouseResource
-        return HouseResource::collection($houses);
+        // Fetch the filtered houses
+        try {
+            $houses = $query->with('images')->get();
+    
+            // Return the houses using HouseResource
+            return HouseResource::collection($houses);
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            \Log::error('Search query error: ' . $e->getMessage());
+            return response()->json(['error' => 'Error fetching house listings.'], 500);
+        }    
     }
     
 

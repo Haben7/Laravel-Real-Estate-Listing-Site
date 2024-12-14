@@ -14,11 +14,11 @@
             border-radius: 20px
         }
         #li{
-            margin-top: 36px
+            margin-top: 66px
         }
         ul{
             margin-top: 2px;
-        }
+        } 
         h1{
                 }        
         #main{
@@ -50,7 +50,7 @@
             width: 95%;
         }
         #owner{
-            margin-top: 40px;
+            margin-top: 55px;
             padding: 8px 8px 8px 18px;
 
         }
@@ -62,7 +62,7 @@
 <body class="bg-gray-100">
 
     <!-- Header -->
-    <header class="bg-gray-800 text-white border-b border-gray-600 shadow sticky top-0 z-50">
+    <header class="bg-purple-900 text-white border-b border-indigo-900 shadow sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold">Real Estate</h1>
             <nav>
@@ -81,20 +81,18 @@
     <div class="flex">
 
         <!-- Sidebar -->
-        <aside class="bg-indigo-900 text-gray-100 w-64 shadow h-screen fixed top-0 left-0">
+        <aside class="bg-purple-800 text-gray-100 w-64 shadow h-screen fixed top-0 left-0">
             
             <div class="p-4" id="div">
                 <ul class="mt-4 space-y-2">
                     <li id="li"><a href="{{ route('owner.dashboard') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-home"></i> Home</a></li>
                     <li id="li"><a href="{{ route('properties.index') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-building"></i> Manage Properties</a></li>
-                    <li id="li"><a href="/admin/dashboard" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-credit-card"></i> Manage Subscription</a></li>
-                    <li id="li"><a href="/admin/reports" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-envelope"></i> Inquries Management</a></li>
-                    <li id="li"><a href="/admin/content" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-bell"></i> View Notifications</a></li>
-                    <li id="li"><a href="/admin/settings" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-cogs"></i> Settings</a></li>
+                    <li id="li"><a href="{{ route('owner.chat') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-envelope"></i> Inquries </a></li>
+                    <li id="li"><a href="{{ route(' owner.setting.form') }}" class="block px-4 py-2 rounded hover:bg-indigo-600 p-4"><i class="fas fa-cogs"></i> Settings</a></li>
                 </ul>
-                
+               
             </div>
-            <div id="owner" class="bg-indigo-600 ">Welcome,
+            <div id="owner" class="bg-purple-700">Welcome,
             </div>
         </aside>
 
