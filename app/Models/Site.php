@@ -18,7 +18,7 @@ class Site extends Model
 
     public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'site_id');
     }
   
     public function houses()

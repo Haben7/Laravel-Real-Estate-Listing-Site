@@ -36,8 +36,5 @@ class House extends Model
     {
         return $this->hasMany(Image::class);
     }
-    public function bookmarkedBy()
-{
-    return $this->belongsToMany(User::class, 'bookmarks', 'house_id', 'user_id');
-}
+
 }

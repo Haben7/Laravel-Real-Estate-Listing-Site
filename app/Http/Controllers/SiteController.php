@@ -12,16 +12,11 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $sites = Site::withCount('houses')->where('owner_id', Auth::id())->get();
-
-        $sites = Site::where('owner_id', Auth::id())->get();
-        $sites = Site::paginate(7); // Adjust the number to change the items per page
-    return view('owner.sites.index', compact('sites'));
+        $sites = Site::where('owner_id', Auth::id())->paginate(7);
+        return view('owner.sites.index', compact('sites'));
     }
-    // $owners = User::where('role', 'owner')->get();
-    // $owners = User::where('role', 'owner')->paginate(8);
-
-
+    
+  
     public function create()
     {
         return view('owner.sites.create');
@@ -77,4 +72,28 @@ public function destroy($id)
     return redirect()->route('sites.index')->with('success', 'Site deleted successfully!');
 }
 
+
+public function sitesPerYear()
+{
+    $sitesPerYear = Site::selectRaw('YEAR(created_at) as year, COUNT(*) as total')
+        ->groupBy('year')
+        ->orderBy('year', 'asc')
+        ->get();
+
+    return response()->json($sitesPerYear);
 }
+
+public function sitesPerYearForOwner()
+{
+    $sitesPerYear = Site::selectRaw('YEAR(created_at) as year, COUNT(*) as total')
+        ->where('owner_id', Auth::id()) // Filter by logged-in owner
+        ->groupBy('year')
+        ->orderBy('year', 'asc')
+        ->get();
+
+    return response()->json($sitesPerYear);
+}
+
+
+}
+

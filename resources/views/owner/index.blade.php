@@ -147,51 +147,122 @@
                         </div>
 
 
-                        <div class="container-fluid" id="graph">
-                            <!-- Row container for side-by-side display -->
-                            <div class="row g-4">
-                        
-                            
-                        
-                                <!-- Total Properties Listed -->
-                                <div class="col-12 col-xl-6">
-                                    <div class="card mb-4">
-                                        <div class="card-header">
-                                            <i class="fas fa-chart-bar me-1"></i>
-                                            Total Properties Listed
-                                        </div>
+                        <div class="container mt-5">
+                            <div class="row">
+                                <!-- Sites Created Per Year Chart -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">Sites Created Per Year</div>
                                         <div class="card-body">
-                                            <canvas id="totalPropertiesChart" width="100%" height="40"></canvas>
+                                            <canvas id="sitesChart" width="400" height="200"></canvas>
                                         </div>
                                     </div>
                                 </div>
                         
+                                <!-- Number of Houses Chart -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">Number of Houses per Site</div>
+                                        <div class="card-body">
+                                            <canvas id="housesChart" width="400" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
-                       
-                          
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2025</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        
+                        <script>
+                            // Sites Created Per Year Chart
+                            document.addEventListener('DOMContentLoaded', function () {
+                                fetch("{{ route('sites.perYearForOwner') }}")
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        const years = data.map(item => item.year);
+                                        const totals = data.map(item => item.total);
+                        
+                                        const ctx = document.getElementById('sitesChart').getContext('2d');
+                                        new Chart(ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: years,
+                                                datasets: [{
+                                                    label: 'Sites Created',
+                                                    data: totals,
+                                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                responsive: true,
+                                                plugins: {
+                                                    legend: {
+                                                        display: true,
+                                                        position: 'top'
+                                                    }
+                                                },
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true,
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Number of Sites'
+                                                        }
+                                                    },
+                                                    x: {
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Year'
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    })
+                                    .catch(error => console.error('Error fetching data:', error));
+                            });
+                        
+                            // Number of Houses Chart
+                            const houseCtx = document.getElementById('housesChart').getContext('2d');
+                            const siteLabels = @json($sites->pluck('name'));
+                            const houseCounts = @json($sites->pluck('houses_count'));
+                        
+                            new Chart(houseCtx, {
+                                type: 'bar',
+                                data: {
+                                    labels: siteLabels,
+                                    datasets: [{
+                                        label: 'Number of Houses',
+                                        data: houseCounts,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    plugins: {
+                                        legend: { display: false }
+                                    },
+                                    scales: {
+                                        y: { beginAtZero: true }
+                                    }
+                                }
+                            });
+                        </script>
+                           <footer class="py-4 bg-light mt-auto">
+                            <div class="container-fluid px-4">
+                                <div class="d-flex align-items-center justify-content-between small">
+                                    <div class="text-muted">Copyright &copy; Your Website 2025</div>
+                                    <div>
+                                        <a href="#">Privacy Policy</a>
+                                        &middot;
+                                        <a href="#">Terms &amp; Conditions</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script></script>
+                        </footer>
     </body>
 </html>

@@ -12,16 +12,24 @@ use Illuminate\Http\Request;
 class OwnerController extends Controller
 {
 
+    // public function dashboard()
+    // {
+    //     // Get the authenticated owner
+    //     $owner = Auth::user();
+    //     $sites = Site::withCount('houses')->where('owner_id', Auth::id())->get();
+
+    //     // Pass the owner's data to the view
+    //     return view('owner.index', compact('owner'));
+    // }
     public function dashboard()
     {
-        // Get the authenticated owner
         $owner = Auth::user();
-        $sites = Site::withCount('houses')->where('owner_id', Auth::id())->get();
-
-        // Pass the owner's data to the view
-        return view('owner.index', compact('owner'));
+        $sites = Site::withCount('houses')->where('owner_id', $owner->id)->get();
+    
+        // Pass data to the view
+        return view('owner.index', compact('owner', 'sites'));
     }
-
+    
     public function index()
 {
     $properties = auth()->user()->properties;
@@ -34,11 +42,11 @@ public function create()
 public function chat()
 {
     
-    return view('owner.emails.userToOwner'); // Make sure the 'owner.chat' view exists
+    return view('owner.emails.userToOwner'); 
 }
 public function showSettingForm()
 {
-    return view('owner.setting'); // Ensure this view exists
+    return view('owner.setting');
 }
 
 public function update(Request $request)

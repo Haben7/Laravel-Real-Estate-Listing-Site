@@ -10,6 +10,8 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <style>
               .bg-custom-blue {
         background-color: #28bba7; 
@@ -24,14 +26,14 @@
                 background-color: #042f2e; 
             }
             .bg-custom-blu {
-                    background-color: #1e1b4b; /* Replace with your desired hex code */
+                    background-color: #1e1b4b; 
     }
         </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Real Estate</a>
+            <a class="navbar-brand ps-3" href="{{ route('admin.index') }}">Real Estate</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -153,7 +155,6 @@
                         <div class="container-fluid" id="graph">
                             <!-- Row container for side-by-side display -->
                             <div class="row g-4">
-                        
                                 <!-- User Registration Over Time -->
                                 <div class="col-12 col-xl-6">
                                     <div class="card mb-4">
@@ -167,95 +168,101 @@
                                     </div>
                                 </div>
                         
-                                <!-- Total Properties Listed -->
+                                <!-- Sites Created Over Time -->
                                 <div class="col-12 col-xl-6">
                                     <div class="card mb-4">
                                         <div class="card-header">
                                             <i class="fas fa-chart-bar me-1"></i>
-                                            Total Properties Listed
+                                            Sites Created Over Time
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="totalPropertiesChart" width="100%" height="40"></canvas>
+                                            <canvas id="sitesChart" width="100%" height="40"></canvas>
                                         </div>
                                     </div>
                                 </div>
-                        
                             </div>
                         </div>
                         
-                       
-                          
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2025</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                // User Registration Chart
+                                const userRegistrationData = {
+                                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                    datasets: [{
+                                        label: 'New Users',
+                                        data: @json(array_values($userRegistrations)),
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderWidth: 2,
+                                        fill: true
+                                    }]
+                                };
+                        
+                                const userRegistrationConfig = {
+                                    type: 'line',
+                                    data: userRegistrationData,
+                                    options: {
+                                        responsive: true,
+                                        plugins: {
+                                            legend: { position: 'top' },
+                                            title: { display: true, text: 'User Registration Over Time' }
+                                        },
+                                        scales: { y: { beginAtZero: true } }
+                                    },
+                                };
+                        
+                                new Chart(
+                                    document.getElementById('userRegistrationChart'),
+                                    userRegistrationConfig
+                                );
+                        
+                                // Sites Created Chart
+                                fetch("{{ route('sites.perYear') }}")
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        const years = data.map(item => item.year);
+                                        const totals = data.map(item => item.total);
+                        
+                                        const sitesChartConfig = {
+                                            type: 'bar',
+                                            data: {
+                                                labels: years,
+                                                datasets: [{
+                                                    label: 'Number of Sites',
+                                                    data: totals,
+                                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                responsive: true,
+                                                plugins: {
+                                                    legend: { position: 'top' },
+                                                    title: { display: true, text: 'Sites Created Over Time' }
+                                                },
+                                                scales: { y: { beginAtZero: true } }
+                                            }
+                                        };
+                        
+                                        new Chart(
+                                            document.getElementById('sitesChart'),
+                                            sitesChartConfig
+                                        );
+                                    });
+                            });
+                        </script>
+             <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2025</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
                         </div>
                     </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
-        <script> const userRegistrationData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            datasets: [{
-                label: 'New Users',
-                data: @json(array_values($userRegistrations)),
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 2,
-                fill: true
-            }]
-        };
-    
-        const userRegistrationConfig = {
-            type: 'line',
-            data: userRegistrationData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { position: 'top' },
-                    title: { display: true, text: 'User Registration Over Time' }
-                },
-                scales: { y: { beginAtZero: true } }
-            },
-        };
-    
-        const userRegistrationChart = new Chart(
-            document.getElementById('userRegistrationChart'),
-            userRegistrationConfig
-        );
-    
-        // Properties listed data (passed from the controller)
-   
-    
-        const totalPropertiesConfig = {
-            type: 'bar',
-            data: totalPropertiesData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { position: 'top' },
-                    title: { display: true, text: 'Total Properties Listed Over Time' }
-                },
-                scales: { y: { beginAtZero: true } }
-            },
-        };
-    
-        const totalPropertiesChart = new Chart(
-            document.getElementById('totalPropertiesChart'),
-            totalPropertiesConfig
-        );</script>
+                </div>
+            </footer>            
     </body>
 </html>

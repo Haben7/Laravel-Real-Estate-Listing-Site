@@ -39,7 +39,7 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'role' => $request->input('role'),
-            'real_estate_name' => $request->input('real_estate_name'),  // Save the real estate name if provided
+            'real_estate_name' => $request->input('real_estate_name'),  
         ]);
 
         return redirect()->route('users.index')->with('success', ucfirst($user->role) . ' created successfully.');

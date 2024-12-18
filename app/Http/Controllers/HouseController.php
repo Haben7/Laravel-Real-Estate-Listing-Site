@@ -13,7 +13,8 @@ class HouseController extends Controller
 {
     public function index($siteId)
     {
-        $site = Site::findOrFail($siteId); // Assuming you have a Site model
+        $site = Site::where('id', $siteId)->where('owner_id', Auth::id())->firstOrFail();
+        
         $houses = House::where('site_id', $siteId)->get();
         
         return view('owner.houses.index', compact('houses', 'site'));
