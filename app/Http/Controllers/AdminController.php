@@ -24,12 +24,7 @@ class AdminController extends Controller
             ->groupBy('month')
             ->pluck('count', 'month');
 
-        // Properties listed per year
-        // $propertiesListed = Property::selectRaw('YEAR(created_at) as year, COUNT(*) as count')
-        //     ->groupBy('year')
-        //     ->pluck('count', 'year');
-
-        // Convert data to JSON for JavaScript
+      
         $userRegistrations = array_replace(array_fill(1, 12, 0), $userRegistrations->toArray()); // Fill missing months with 0
         // $propertiesListed = $propertiesListed->toArray();
 
