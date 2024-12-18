@@ -1,7 +1,6 @@
 <?php
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PropertyController;
-use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\Api\HouseController;
 use App\Http\Controllers\Api\CityController;
 use Illuminate\Http\Request;
@@ -40,4 +39,3 @@ Route::middleware(['simple_cors'])->group(function () {
 
 Route::post('/send-email', [EmailController::class, 'sendEmailToOwner']);
 
-Route::post('/bookmarks', [BookmarkController::class, 'store']);
