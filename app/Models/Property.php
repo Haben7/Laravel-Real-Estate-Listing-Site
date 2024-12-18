@@ -16,33 +16,22 @@ class Property extends Model
         'property_type',
         'listing_type',
         'price',
-        // 'maintenance_fees',
-        // 'taxes',
-        // 'utilities',
         'negotiable',
-        // 'size',
         'lot_size',
         'bedrooms',
         'bathrooms',
         'floors',
-        // 'garage', // Allow null values
-        // 'balcony',
         'garden',
-        'has_pool', // Changed swimming_pool to has_pool
+        'has_pool',
         'heating_system',
         'cooling_system',
         'furnishing_status',
-        // 'year_built',
-        // 'renovation_year',
         'condition',
         'ownership_type',
         'title_status',
-        // 'zoning',
         'building_permits',
         'mortgage_status',
-        // 'documents',
-        // 'owner_contact',
-        'owner_id' // Ensure this is included for relational mapping
+        'owner_id' 
     ];
 
     public function owner()

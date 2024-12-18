@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Property;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Site;

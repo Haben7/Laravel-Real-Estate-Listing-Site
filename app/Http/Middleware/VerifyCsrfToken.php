@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://localhost:5173/', // Replace with your actual frontend URL
+        'http://localhost:5173/', 
     ];
 }
