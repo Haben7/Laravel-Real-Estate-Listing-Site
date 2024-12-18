@@ -69,16 +69,13 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Properties                  <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div  id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('sites.create') }}">Create Site</a>
                                     <a class="nav-link" href="{{ route('sites.index') }}">All Sites</a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="{{ route('owner.emails.userToOwner') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Inquries 
-                            </a>
+                          
                             <a class="nav-link" href="{{ route('owner.setting.form') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Settings
@@ -94,7 +91,9 @@
                             </a>
                         </div>
                     </div>
-                   
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Welcome,
+                    </div>
                 </nav>
             </div>
               <div id="layoutSidenav_content">
@@ -104,7 +103,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright &copy; Your Website 2025</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;

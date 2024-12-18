@@ -72,7 +72,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 User Management                   <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('users.create') }}">Create User</a>
                                     <a class="nav-link" href="{{ route('users.index') }}">All Users</a>
@@ -189,7 +189,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright &copy; Your Website 2025</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
