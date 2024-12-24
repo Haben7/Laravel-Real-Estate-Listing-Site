@@ -11,16 +11,6 @@ use Illuminate\Http\Request;
 
 class OwnerController extends Controller
 {
-
-    // public function dashboard()
-    // {
-    //     // Get the authenticated owner
-    //     $owner = Auth::user();
-    //     $sites = Site::withCount('houses')->where('owner_id', Auth::id())->get();
-
-    //     // Pass the owner's data to the view
-    //     return view('owner.index', compact('owner'));
-    // }
     public function dashboard()
     {
         $owner = Auth::user();
@@ -75,7 +65,18 @@ public function update(Request $request)
     return redirect()->route('owner.setting')->with('success', 'Information updated successfully.');
 }
 
+public function chart()
+{
+    $owner = Auth::user();
+        $sites = Site::withCount('houses')->where('owner_id', $owner->id)->get();
+    return view('owner.chart', compact('sites')); 
+}
 
+public function table()
+{
+    $sites = Site::withCount('houses')->get();
+    return view('owner.table', compact('sites')); 
+}
 }
 
 

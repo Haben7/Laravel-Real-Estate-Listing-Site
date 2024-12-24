@@ -207,7 +207,7 @@ public function getHousesByCity($cityName)
  public function site()
     {
         $sites = Site::where('owner_id', Auth::id())->get();
-    return view('admin.properties.site', compact('sites'));
+    return view('admin.properties.site');
     }
 
     public function sitecreate()
@@ -293,6 +293,32 @@ public function setting(Request $request)
     // Redirect or return response
     return redirect()->route('admin.setting.update')->with('success', 'Information updated successfully.');
 }
+
+public function chart()
+{
+    // Example: Fetch user registrations grouped by month for the current year
+    $userRegistrations = User::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        ->whereYear('created_at', date('Y'))
+        ->groupBy('month')
+        ->orderBy('month')
+        ->pluck('count', 'month')
+        ->toArray();
+
+    // Fill missing months with 0
+    $userRegistrations = array_replace(array_fill(1, 12, 0), $userRegistrations);
+
+    return view('admin.chart', compact('userRegistrations'));
+}
+
+
+public function table()
+{
+    // Example data for table
+    $users = User::paginate(10);
+
+    return view('admin.table', compact('users'));
+}
+
 
 }
 

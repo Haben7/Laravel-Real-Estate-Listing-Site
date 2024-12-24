@@ -46,8 +46,16 @@ Route::middleware(['auth', 'user-access:admin'])->group(function(){
 
     Route::put('/admin/setting', [AdminController::class, 'setting'])->name('admin.setting.update');
 
+    Route::get('/chart', [AdminController::class, 'chart'])->name('admin.chart');
+Route::get('/table', [AdminController::class, 'table'])->name('admin.table');
+
     Route::get('/sites/chart', [SiteController::class, 'sitesPerYear'])->name('sites.perYear');
 Route::view('/sites/bar-graph', 'owner.sites.chart')->name('sites.chart');
+
+
+
+
+
 });
 
 //owner route
@@ -84,6 +92,7 @@ Route::post('/send-email', [EmailController::class, 'sendEmailToOwner']);
 
 Route::post('/reply-email', [EmailController::class, 'replyEmail'])->name('reply.email');
 Route::get('/sites-per-year', [SiteController::class, 'sitesPerYearForOwner'])->name('sites.perYearForOwner');
-
+Route::get('/charts', [OwnerController::class, 'chart'])->name('owner.chart');
+Route::get('/tables', [OwnerController::class, 'table'])->name('owner.table');
 });
 
