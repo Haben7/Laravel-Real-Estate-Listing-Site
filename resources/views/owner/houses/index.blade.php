@@ -9,7 +9,7 @@
 </head>
 <div class="container">
     <h1>Houses for {{ $site->name }}</h1>
-    <a href="{{ route('owner.houses.create', $site->id) }}" style="display: block; text-align: center; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin: 20px auto; width: 150px; transition: background-color 0.3s; font-size: 1em; margin-left: 10px;" class="bg-indigo-900">Add House</a>
+    <a href="{{ route('owner.houses.create', $site->id) }}" style="display: block; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin: 20px auto; width: 150px; transition: background-color 0.3s; font-size: 1em; margin-left: 10px;" class="bg-indigo-900">Add House</a>
 
     @if ($houses->isEmpty())
         <div class="alert alert-info" role="alert">

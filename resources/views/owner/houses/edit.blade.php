@@ -1,14 +1,16 @@
 @extends('layouts.sidebar')
 
 @section('content')
-    <h1>Edit House</h1>
+<h1 id="house" class="text-3xl font-semibold text-gray-800 mb-6" style="margin-left: 30px;">Edit House</h1>
 
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+        @if(session('success'))
+        <div class="alert alert-success bg-green-200 text-green-800 p-3 mb-4 rounded-md">
+            {{ session('success') }}
+        </div>
+        @endif
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
+        @if ($errors->any())
+        <div class="alert alert-danger bg-red-200 text-red-800 p-3 mb-4 rounded-md">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -17,7 +19,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('owner.houses.update', [$site->id, $house->id]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('owner.houses.update', [$site->id, $house->id]) }}" enctype="multipart/form-data" class="space-y-6" style="margin-left: 30px;margin-right:30px">
         @csrf
         @method('PUT')
 
