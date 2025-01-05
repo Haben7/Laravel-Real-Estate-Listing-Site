@@ -19,7 +19,8 @@ class HouseResource extends JsonResource
           'images' => $this->images->map(function($image) {
     return asset('storage/' . $image->path);
 }),
- 
+
+        'id' => $this->id, 
         'title' => $this->title,
         'price' => $this->price,
         'location' => $this->location,
@@ -32,8 +33,9 @@ class HouseResource extends JsonResource
         'size' => $this->size,
         'area' => $this->area,
         'description' => $this->description,
-        'real_estate_name' =>$this->real_estate_name,
-        
+         'site_name' => $this->site->name ?? null,
+         'real_estate_name' => $this->site->owner->real_estate_name ?? null,
+     
         
         ];
     }

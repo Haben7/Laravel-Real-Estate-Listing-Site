@@ -296,7 +296,7 @@ public function setting(Request $request)
 
 public function chart()
 {
-    // Example: Fetch user registrations grouped by month for the current year
+    
     $userRegistrations = User::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
         ->whereYear('created_at', date('Y'))
         ->groupBy('month')

@@ -54,7 +54,7 @@ class UserController extends Controller
     // Check password validity
     if (!Hash::check($request->password, $user->password)) {
         \Log::error('Invalid password for user: ' . $request->email);
-        return response()->json(['message' => 'Invalid email or password'], 401);
+        return response()->json(['message' => 'Invalid password'], 401);
     }
  
     // Log user in
@@ -81,7 +81,6 @@ public function logout(Request $request)
     return response()->json(['message' => 'Successfully logged out'], 200);
 }
 
-    // Add this method to the UserController
     public function update(Request $request, $id)
     {
         // Check if the user exists
@@ -119,7 +118,6 @@ public function logout(Request $request)
         }
     }
     
-// Add this method to the UserController
 public function destroy($id)
 {
     // Find the user by ID

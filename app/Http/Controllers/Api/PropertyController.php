@@ -34,23 +34,17 @@ class PropertyController extends Controller
 {
     public function index(Request $request)
     {
-        // Get 'page' and 'limit' from the request, with default values
-        $page = $request->query('page', 1);  // Default page is 1
-        $limit = $request->query('limit', 5);  // Default limit per page is 10
+        $limit = $request->query('limit', 5); // Default limit to 5
 
-        // Paginate the houses
-        $houses = House::with('images')->paginate($limit);
+        // Paginate houses with necessary relationships
+        $houses = House::with(['images', 'site.owner'])->paginate($limit);
 
-        if ($houses->isNotEmpty()) {
-            return response()->json([
-                'data' => HouseResource::collection($houses),
-                'totalPages' => $houses->lastPage(),
-                'currentPage' => $houses->currentPage(),
-            ]);
-        } else {
-            return response()->json(['message' => 'No record available'], 200);
-        }
+        // Return the paginated data with the resource collection
+        return response()->json([
+            'data' => HouseResource::collection($houses->items()), // Current page data
+            'totalPages' => $houses->lastPage(), // Total number of pages
+            'currentPage' => $houses->currentPage(), // Current page number
+            'totalItems' => $houses->total(), // Total number of houses
+        ]);
     }
 }
-
-
